@@ -38,6 +38,7 @@ public class BillItem {
     @Basic(optional = false)
     @Column(name = "discount_percentage")
     private Double discountPercentage;
+    @JoinColumn(name = "no_bill", referencedColumnName = "no_bill", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Bill bill;
 }

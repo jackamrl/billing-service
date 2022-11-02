@@ -1,7 +1,12 @@
 package com.mycompany.billingservice;
 
 import com.mycompany.billingservice.entities.Bill;
+import com.mycompany.billingservice.entities.BillItem;
+import com.mycompany.billingservice.entities.Quote;
+import com.mycompany.billingservice.repositories.BillItemRepository;
 import com.mycompany.billingservice.repositories.BillRepository;
+import com.mycompany.billingservice.repositories.QuoteItemRepository;
+import com.mycompany.billingservice.repositories.QuoteRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +23,7 @@ public class BillingServiceApplication {
 		SpringApplication.run(BillingServiceApplication.class, args);
 	}
 
+
 	@Bean
 	public ModelMapper modelMapper()
 	{
@@ -25,13 +31,13 @@ public class BillingServiceApplication {
 	}
 
 //	@Bean
-//	CommandLineRunner start(BillRepository billRepository) {
+//	CommandLineRunner start(BillItemRepository billItemRepository) {
 //		return args ->  {
 //			for (int i = 0; i < 10; i++) {
-//				Bill bill = Bill.builder()
-//						.id(UUID.randomUUID().toString())
-//						.discountPercentage(1000+Math.random()*5000 )
-//						.billDate(new Date())
+//				BillItem billItem = BillItem.builder()
+//						.qte(2)
+//						.amount(Math.random()*4)
+//						.rateTva(Math.random()/2)
 //						.validationDate(new Date())
 //						.totalHt(Math.random()*7442415)
 //						.totalTTC(Math.random()*545445455)
