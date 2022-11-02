@@ -12,6 +12,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface BillRepository extends JpaRepository<Bill, Integer> {
 
-    @RestResource(path="/byDiscountPercentage")
+    @RestResource(path="byDiscountPercentage", rel="byDiscountPercentage")
     List<Bill> findByDiscountPercentage(@Param("d") Double discountPercentage);
 }
