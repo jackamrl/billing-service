@@ -42,5 +42,5 @@ public class Bill {
     private Double totalTTC;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
-    private List<BillItem> billItemMap;
+    private List<BillItem> billItemList;
 }
