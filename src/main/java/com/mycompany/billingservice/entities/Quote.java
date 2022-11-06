@@ -37,6 +37,6 @@ public class Quote {
     @Column(name = "total_ttc")
     private Double totalTTC;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quote")
+    @OneToMany( mappedBy = "quote")
     private List<QuoteItem> quoteItemList;
 }

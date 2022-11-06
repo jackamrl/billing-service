@@ -2,10 +2,10 @@ package com.mycompany.billingservice.entities;
 
 import org.springframework.data.rest.core.config.Projection;
 
-@Projection(types = Bill.class, name = "p1")
-public interface BillProjection {
+@Projection(types = Quote.class, name = "q1")
+public interface QuoteProjection {
 
-    public Integer getNoBill();
+    public Integer getNoQuote();
 
     public Double getTotalTTC();
 }

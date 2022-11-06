@@ -28,4 +28,6 @@ public class QuoteItem {
     @JoinColumn(name = "no_quote", referencedColumnName = "no_quote", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Quote quote;
+
+
 }

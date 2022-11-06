@@ -38,12 +38,12 @@ public class BillingServiceApplication {
 //						.qte(2)
 //						.amount(Math.random()*4)
 //						.rateTva(Math.random()/2)
-//						.validationDate(new Date())
-//						.totalHt(Math.random()*7442415)
-//						.totalTTC(Math.random()*545445455)
+//						.discountPercentage(Math.random())
+//						.bill(new Bill())
+//
 //						.build();
 //
-//				billRepository.save(bill);
+//				billItemRepository.save(billItem);
 //			}
 //		};
 //	}

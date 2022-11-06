@@ -1,6 +1,6 @@
 package com.mycompany.billingservice.entities;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,7 +40,7 @@ public class Bill {
     @Basic(optional = false)
     @Column(name = "total_ttc")
     private Double totalTTC;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill",fetch = FetchType.LAZY)
     private List<BillItem> billItemList;
 }

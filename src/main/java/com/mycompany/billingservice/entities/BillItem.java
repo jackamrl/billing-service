@@ -1,7 +1,7 @@
 package com.mycompany.billingservice.entities;
 
 
-import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +38,8 @@ public class BillItem {
     @Basic(optional = false)
     @Column(name = "discount_percentage")
     private Double discountPercentage;
-    @JoinColumn(name = "no_bill", referencedColumnName = "no_bill", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "no_bill", referencedColumnName = "no_bill")
     private Bill bill;
+
 }
