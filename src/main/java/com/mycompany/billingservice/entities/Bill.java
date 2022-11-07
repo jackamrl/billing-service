@@ -41,6 +41,6 @@ public class Bill {
     @Column(name = "total_ttc")
     private Double totalTTC;
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill",fetch = FetchType.EAGER)
     private List<BillItem> billItemList;
 }

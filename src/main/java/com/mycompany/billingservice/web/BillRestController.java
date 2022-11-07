@@ -1,7 +1,7 @@
 package com.mycompany.billingservice.web;
 
-import com.mycompany.billingservice.dto.BillRequestDTO;
-import com.mycompany.billingservice.dto.BillResponseDTO;
+import com.mycompany.billingservice.dto.bill.BillRequestDTO;
+import com.mycompany.billingservice.dto.bill.BillResponseDTO;
 import com.mycompany.billingservice.entities.Bill;
 import com.mycompany.billingservice.repositories.BillRepository;
 import com.mycompany.billingservice.services.BillService;

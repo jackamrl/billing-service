@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 // JackDev
 //update 02/11/2022
@@ -40,6 +41,7 @@ public class BillItem {
     private Double discountPercentage;
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "no_bill", referencedColumnName = "no_bill")
+    //@RestResource(path = "libraryAddress", rel="bill")
     private Bill bill;
 
 }

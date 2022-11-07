@@ -1,7 +1,7 @@
 package com.mycompany.billingservice.servicesImpl;
 
-import com.mycompany.billingservice.dto.BillRequestDTO;
-import com.mycompany.billingservice.dto.BillResponseDTO;
+import com.mycompany.billingservice.dto.bill.BillRequestDTO;
+import com.mycompany.billingservice.dto.bill.BillResponseDTO;
 import com.mycompany.billingservice.entities.Bill;
 import com.mycompany.billingservice.mappers.BillMapper;
 import com.mycompany.billingservice.repositories.BillRepository;
@@ -10,8 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
 
 @Service
 @Transactional
@@ -19,13 +17,11 @@ public class BillServiceImpl implements BillService {
 
     private BillRepository billRepository;
 
-    private ModelMapper modelMapper;
 
     private BillMapper billMapper;
 
-    public BillServiceImpl(BillRepository billRepository, ModelMapper modelMapper, BillMapper billMapper) {
+    public BillServiceImpl(BillRepository billRepository,BillMapper billMapper) {
         this.billRepository = billRepository;
-        this.modelMapper = modelMapper;
         this.billMapper = billMapper;
     }
 

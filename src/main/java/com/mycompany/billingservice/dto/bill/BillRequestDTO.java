@@ -1,4 +1,4 @@
-package com.mycompany.billingservice.dto;
+package com.mycompany.billingservice.dto.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

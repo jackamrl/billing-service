@@ -1,8 +1,7 @@
 package com.mycompany.billingservice.services;
 
-import com.mycompany.billingservice.dto.BillRequestDTO;
-import com.mycompany.billingservice.dto.BillResponseDTO;
-import com.mycompany.billingservice.entities.Bill;
+import com.mycompany.billingservice.dto.bill.BillRequestDTO;
+import com.mycompany.billingservice.dto.bill.BillResponseDTO;
 
 public interface BillService {
 
