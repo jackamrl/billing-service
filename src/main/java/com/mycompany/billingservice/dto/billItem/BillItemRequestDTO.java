@@ -13,6 +13,6 @@ public class BillItemRequestDTO {
     private Double amount;
     private Double rateTva;
     private Double discountPercentage;
-    private Bill bill;
+    private Integer noBill;
 
 }
