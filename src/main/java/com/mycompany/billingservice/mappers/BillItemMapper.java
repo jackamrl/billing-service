@@ -26,7 +26,7 @@ public class BillItemMapper {
     }
 
     //convert billitem to responseDTO
-    public BillItemResponseDTO fromBillItemToResponseDTOBillItem(BillItem billItem){
+    public BillItemResponseDTO fromBillItemToBillItemResponseDTO(BillItem billItem){
         BillItemResponseDTO billItemResponseDTO = this.modelMapper.map(billItem, BillItemResponseDTO.class);
 
         return billItemResponseDTO;

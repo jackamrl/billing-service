@@ -15,12 +15,10 @@ import java.util.List;
 @RequestMapping("/api/bill")
 public class BillRestController {
 
-    private BillRepository billRepository;
     private BillService billService;
 
 
-    public BillRestController(BillRepository billRepository, BillService billService) {
-        this.billRepository = billRepository;
+    public BillRestController(BillService billService) {
         this.billService = billService;
     }
 

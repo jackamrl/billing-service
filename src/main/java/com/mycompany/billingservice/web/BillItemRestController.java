@@ -15,12 +15,10 @@ import java.util.List;
 @RequestMapping("/api/billitem")
 public class BillItemRestController {
 
-    private BillItemRepository billItemRepository;
     private BillItemService billItemService;
 
 
-    public BillItemRestController(BillItemRepository billItemRepository, BillItemService billItemService) {
-        this.billItemRepository = billItemRepository;
+    public BillItemRestController(BillItemService billItemService) {
         this.billItemService = billItemService;
     }
 
@@ -52,10 +50,11 @@ public class BillItemRestController {
         return new ResponseEntity<>(billItemResponseDTO, HttpStatus.OK);
     }
 
+    // Delete a bill item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
         billItemService.delete(id);
-        return ResponseEntity.ok("bill deleted");
+        return ResponseEntity.ok("bill "+id+"item deleted");
 
     }
 

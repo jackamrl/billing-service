@@ -31,7 +31,7 @@ public class BillItemServiceImpl implements BillItemService {
         BillItem billItem = billItemMapper.fromBillItemRequestDTOToBillItem(billItemRequestDTO);
         BillItem saveBillItem = billItemRepository.save(billItem);
 
-        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(saveBillItem);
+        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToBillItemResponseDTO(saveBillItem);
         return billItemResponseDTO;
     }
 
@@ -43,7 +43,7 @@ public class BillItemServiceImpl implements BillItemService {
         List<BillItemResponseDTO> billItemResponseDTOS = new ArrayList<BillItemResponseDTO>();
 
         for (BillItem billItem : billItemList){
-            BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(billItem);// mapping bill to billresponse
+            BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToBillItemResponseDTO(billItem);// mapping bill to billresponse
             billItemResponseDTOS.add(billItemResponseDTO);//adding to the new list of billItem response
         }
         return billItemResponseDTOS;
@@ -51,9 +51,9 @@ public class BillItemServiceImpl implements BillItemService {
 
     @Override
     public BillItemResponseDTO findById(Integer id) {
-        BillItem billItemResponse = billItemRepository.findById(id).orElseThrow(()-> new RuntimeException(String
+        BillItem billItem = billItemRepository.findById(id).orElseThrow(()-> new RuntimeException(String
                 .format("Bill item %s not found", id)));
-        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(billItemResponse);
+        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToBillItemResponseDTO(billItem);
         return billItemResponseDTO;
     }
 
@@ -68,7 +68,7 @@ public class BillItemServiceImpl implements BillItemService {
         if (billItem.getBill()!=null) myBillItem.setBill(billItem.getBill());
         billItemRepository.save(myBillItem);
 
-        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(myBillItem);
+        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToBillItemResponseDTO(myBillItem);
 
         return billItemResponseDTO;
     }

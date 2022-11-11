@@ -1,5 +1,6 @@
 package com.mycompany.billingservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,7 +37,7 @@ public class Quote {
     @Basic(optional = false)
     @Column(name = "total_ttc")
     private Double totalTTC;
-
-    @OneToMany( mappedBy = "quote")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(cascade = CascadeType.ALL,  mappedBy = "quote",fetch = FetchType.EAGER)
     private List<QuoteItem> quoteItemList;
 }

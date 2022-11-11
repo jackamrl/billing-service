@@ -55,9 +55,9 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public BillResponseDTO findById(Integer id) {
-        Bill billResponse = billRepository.findById(id).orElseThrow(()-> new RuntimeException(String
+        Bill bill = billRepository.findById(id).orElseThrow(()-> new RuntimeException(String
                 .format("Bill %s not found", id)));
-        BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(billResponse);
+        BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(bill);
         return billResponseDTO;
     }
 
