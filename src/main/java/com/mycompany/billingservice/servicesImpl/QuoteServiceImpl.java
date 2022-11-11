@@ -59,18 +59,24 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public QuoteResponseDTO update(Long id, QuoteRequestDTO quoteRequestDTO) {
-        Quote quote =  quoteMapper.fromQuoteRequestDTOToQuote(quoteRequestDTO);
-        Quote myQuote = quoteRepository.findById(id).orElseThrow();
-        if(quote.getQuoteDate()!= null) myQuote.setQuoteDate(new Date());
-        if(quote.getValidationDate()!= null) myQuote.setValidationDate(quote.getValidationDate());
-        if(quote.getTotalHT()!= null) myQuote.setTotalHT(quote.getTotalHT());
-        if(quote.getTotalTTC()!= null) myQuote.setTotalTTC(quote.getTotalTTC());
-        quoteRepository.save(myQuote);
 
-        QuoteResponseDTO quoteResponseDTO = quoteMapper.fromQuoteToQuoteResponseDTO(myQuote);
-
-        return quoteResponseDTO;
+        return null;
     }
+//
+//    @Override
+//    public QuoteResponseDTO update(Long id, QuoteRequestDTO quoteRequestDTO) {
+//        Quote quote =  quoteMapper.fromQuoteRequestDTOToQuote(quoteRequestDTO);
+//        Quote myQuote = quoteRepository.findById(id).orElseThrow();
+//        if(quote.getQuoteDate()!= null) myQuote.setQuoteDate(new Date());
+//        if(quote.getValidationDate()!= null) myQuote.setValidationDate(quote.getValidationDate());
+//        if(quote.getTotalHT()!= null) myQuote.setTotalHT(quote.getTotalHT());
+//        if(quote.getTotalTTC()!= null) myQuote.setTotalTTC(quote.getTotalTTC());
+//        quoteRepository.save(myQuote);
+//
+//        QuoteResponseDTO quoteResponseDTO = quoteMapper.fromQuoteToQuoteResponseDTO(myQuote);
+//
+//        return quoteResponseDTO;
+//    }
 
     @Override
     public void delete(Long id) {
