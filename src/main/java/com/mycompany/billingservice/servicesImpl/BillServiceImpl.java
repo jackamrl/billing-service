@@ -6,10 +6,10 @@ import com.mycompany.billingservice.entities.Bill;
 import com.mycompany.billingservice.mappers.BillMapper;
 import com.mycompany.billingservice.repositories.BillRepository;
 import com.mycompany.billingservice.services.BillService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,14 +34,23 @@ public class BillServiceImpl implements BillService {
         Bill bill = billMapper.fromBillRequestDTOToBill(billRequestDTO);
         Bill saveBill = billRepository.save(bill);
 
-        BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(bill);
+        BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(saveBill);
 
         return billResponseDTO;
     }
 
+    // I want to return a bill with type dto response.
+    // so i map every bill in the list which billrepo return me
     @Override
-    public List<Bill> findAll() {
-        return billRepository.findAll();
+    public List<BillResponseDTO> findAll() {
+        List<Bill> billList =  billRepository.findAll();// this is the list which bill repo return me
+        List<BillResponseDTO> billResponseDTOS = new ArrayList<BillResponseDTO>();
+
+        for (Bill bill : billList){
+            BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(bill);// mapping bill to billresponse
+            billResponseDTOS.add(billResponseDTO);//adding to the new list of bill response
+        }
+        return billResponseDTOS;
     }
 
     @Override

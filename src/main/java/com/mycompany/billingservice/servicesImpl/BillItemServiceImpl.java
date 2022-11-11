@@ -9,6 +9,10 @@ import com.mycompany.billingservice.services.BillItemService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Service
 @Transactional
 public class BillItemServiceImpl implements BillItemService {
@@ -21,12 +25,57 @@ public class BillItemServiceImpl implements BillItemService {
         this.billItemMapper = billItemMapper;
     }
 
+
     @Override
-    public BillItemResponseDTO addBillItem(BillItemRequestDTO billItemRequestDTO) {
+    public BillItemResponseDTO save(BillItemRequestDTO billItemRequestDTO) {
         BillItem billItem = billItemMapper.fromBillItemRequestDTOToBillItem(billItemRequestDTO);
         BillItem saveBillItem = billItemRepository.save(billItem);
 
         BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(saveBillItem);
         return billItemResponseDTO;
+    }
+
+    // I want to return a bill item with type dto response.
+    // so i map every bill item in the list which billitemrepo return me
+    @Override
+    public List<BillItemResponseDTO> findAll() {
+        List<BillItem> billItemList =  billItemRepository.findAll();// this is the list which billItem repo return me
+        List<BillItemResponseDTO> billItemResponseDTOS = new ArrayList<BillItemResponseDTO>();
+
+        for (BillItem billItem : billItemList){
+            BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(billItem);// mapping bill to billresponse
+            billItemResponseDTOS.add(billItemResponseDTO);//adding to the new list of billItem response
+        }
+        return billItemResponseDTOS;
+    }
+
+    @Override
+    public BillItemResponseDTO findById(Integer id) {
+        BillItem billItemResponse = billItemRepository.findById(id).orElseThrow(()-> new RuntimeException(String
+                .format("Bill item %s not found", id)));
+        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(billItemResponse);
+        return billItemResponseDTO;
+    }
+
+    @Override
+    public BillItemResponseDTO update(Integer id, BillItemRequestDTO billItemRequestDTO) {
+        BillItem billItem =  billItemMapper.fromBillItemRequestDTOToBillItem(billItemRequestDTO);
+        BillItem myBillItem = billItemRepository.findById(id).orElseThrow();
+        if (billItem.getAmount()!=null) myBillItem.setAmount(billItem.getAmount());
+        if (billItem.getDiscountPercentage()!=null) myBillItem.setDiscountPercentage(billItem.getDiscountPercentage());
+        if (billItem.getQte()!=null) myBillItem.setQte(billItem.getQte());
+        if (billItem.getRateTva()!=null) myBillItem.setRateTva(billItem.getRateTva());
+        if (billItem.getBill()!=null) myBillItem.setBill(billItem.getBill());
+        billItemRepository.save(myBillItem);
+
+        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToResponseDTOBillItem(myBillItem);
+
+        return billItemResponseDTO;
+    }
+
+    @Override
+    public void delete(Integer id) {
+        billItemRepository.deleteById(id);
+
     }
 }

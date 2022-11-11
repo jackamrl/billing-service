@@ -2,14 +2,13 @@ package com.mycompany.billingservice.web;
 
 import com.mycompany.billingservice.dto.bill.BillRequestDTO;
 import com.mycompany.billingservice.dto.bill.BillResponseDTO;
-import com.mycompany.billingservice.entities.Bill;
+
 import com.mycompany.billingservice.repositories.BillRepository;
 import com.mycompany.billingservice.services.BillService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,8 +26,8 @@ public class BillRestController {
 
     //List of bills
     @GetMapping("/list")
-    public ResponseEntity<List<Bill>> filndAll(){
-        List<Bill> billList = billService.findAll();
+    public ResponseEntity<List<BillResponseDTO>> filndAll(){
+        List<BillResponseDTO> billList = billService.findAll();
         return new ResponseEntity<>(billList, HttpStatus.OK);
     }
     // Find bill by id
@@ -49,11 +48,11 @@ public class BillRestController {
         BillResponseDTO billResponseDTO = billService.update(id,billRequestDTO);
         return new ResponseEntity<>(billResponseDTO, HttpStatus.OK);
     }
-
+    // Delete a bill
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBill(@PathVariable Integer id){
+    public ResponseEntity<?> delete(@PathVariable Integer id){
          billService.delete(id);
-         return ResponseEntity.ok("bill deleted");
+         return ResponseEntity.ok("bill "+id+" deleted");
 
     }
 
