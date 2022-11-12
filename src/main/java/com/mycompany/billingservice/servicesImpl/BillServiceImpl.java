@@ -61,28 +61,23 @@ public class BillServiceImpl implements BillService {
         return billResponseDTO;
     }
 
+
     @Override
     public BillResponseDTO update(Integer id, BillRequestDTO billRequestDTO) {
+        Bill bill =  billMapper.fromBillRequestDTOToBill(billRequestDTO);
+        Bill myBill = billRepository.findById(id).orElseThrow((() -> new IllegalStateException(
+                "bill with id "+ id + " does not exist")));
+        if (bill.getBillDate()!=null) myBill.setBillDate(new Date());
+        if (bill.getValidationDate()!=null) myBill.setValidationDate(bill.getValidationDate());
+        if (bill.getDiscountPercentage()!=null) myBill.setDiscountPercentage(bill.getDiscountPercentage());
+        if (bill.getTotalHt()!=null) myBill.setTotalHt(bill.getTotalHt());
+        if (bill.getTotalTTC()!=null) myBill.setTotalTTC(bill.getTotalTTC());
+        billRepository.save(myBill);
 
+        BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(myBill);
 
-        return null;
+        return billResponseDTO;
     }
-
-//    @Override
-//    public BillResponseDTO update(Integer id, BillRequestDTO billRequestDTO) {
-//        Bill bill =  billMapper.fromBillRequestDTOToBill(billRequestDTO);
-//        Bill myBill = billRepository.findById(id).orElseThrow();
-//        if (bill.getBillDate()!=null) myBill.setBillDate(new Date());
-//        if (bill.getValidationDate()!=null) myBill.setValidationDate(bill.getValidationDate());
-//        if (bill.getDiscountPercentage()!=null) myBill.setDiscountPercentage(bill.getDiscountPercentage());
-//        if (bill.getTotalHt()!=null) myBill.setTotalHt(bill.getTotalHt());
-//        if (bill.getTotalTTC()!=null) myBill.setTotalTTC(bill.getTotalTTC());
-//        billRepository.save(myBill);
-//
-//        BillResponseDTO billResponseDTO = billMapper.fromBillToBillResponseDTO(myBill);
-//
-//        return billResponseDTO;
-//    }
 
     @Override
     public void delete(Integer id) {

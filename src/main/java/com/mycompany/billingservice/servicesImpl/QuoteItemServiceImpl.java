@@ -55,24 +55,20 @@ public class QuoteItemServiceImpl implements QuoteItemService {
         return quoteItemResponseDTO;
     }
 
+
     @Override
     public QuoteItemResponseDTO update(Integer id, QuoteItemRequestDTO quoteItemRequestDTO) {
+        QuoteItem quoteItem =  quoteItemMapper.fromQuoteItemRequestDTOToQuoteItem(quoteItemRequestDTO);
+        QuoteItem myQuoteItem = quoteItemRepository.findById(id).orElseThrow((() -> new IllegalStateException(
+                "quote item with id "+ id + " does not exist")));
+        if (quoteItem.getQte()!=null) myQuoteItem.setQte(quoteItem.getQte());
+        if (quoteItem.getQuote()!=null) myQuoteItem.setQuote(quoteItem.getQuote());
+        quoteItemRepository.save(myQuoteItem);
 
-        return null;
+        QuoteItemResponseDTO quoteItemResponseDTO = quoteItemMapper.fromQuoteItemToQuoteItemResponse(myQuoteItem);
+
+        return quoteItemResponseDTO;
     }
-
-//    @Override
-//    public QuoteItemResponseDTO update(Integer id, QuoteItemRequestDTO quoteItemRequestDTO) {
-//        QuoteItem quoteItem =  quoteItemMapper.fromQuoteItemRequestDTOToQuoteItem(quoteItemRequestDTO);
-//        QuoteItem myQuoteItem = quoteItemRepository.findById(id).orElseThrow();
-//        if (quoteItem.getQte()!=null) myQuoteItem.setQte(quoteItem.getQte());
-//        if (quoteItem.getQuote()!=null) myQuoteItem.setQuote(quoteItem.getQuote());
-//        quoteItemRepository.save(myQuoteItem);
-//
-//        QuoteItemResponseDTO quoteItemResponseDTO = quoteItemMapper.fromQuoteItemToQuoteItemResponse(myQuoteItem);
-//
-//        return quoteItemResponseDTO;
-//    }
 
     @Override
     public void delete(Integer id) {

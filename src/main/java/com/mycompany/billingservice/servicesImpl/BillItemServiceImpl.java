@@ -57,27 +57,23 @@ public class BillItemServiceImpl implements BillItemService {
         return billItemResponseDTO;
     }
 
+
     @Override
     public BillItemResponseDTO update(Integer id, BillItemRequestDTO billItemRequestDTO) {
+        BillItem billItem =  billItemMapper.fromBillItemRequestDTOToBillItem(billItemRequestDTO);
+        BillItem myBillItem = billItemRepository.findById(id).orElseThrow((() -> new IllegalStateException(
+                "bill item with id "+ id + " does not exist")));
+        if (billItem.getAmount()!=null) myBillItem.setAmount(billItem.getAmount());
+        if (billItem.getDiscountPercentage()!=null) myBillItem.setDiscountPercentage(billItem.getDiscountPercentage());
+        if (billItem.getQte()!=null) myBillItem.setQte(billItem.getQte());
+        if (billItem.getRateTva()!=null) myBillItem.setRateTva(billItem.getRateTva());
+        if (billItem.getBill()!=null) myBillItem.setBill(billItem.getBill());
+        billItemRepository.save(myBillItem);
 
-        return null;
+        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToBillItemResponseDTO(myBillItem);
+
+        return billItemResponseDTO;
     }
-
-//    @Override
-//    public BillItemResponseDTO update(Integer id, BillItemRequestDTO billItemRequestDTO) {
-//        BillItem billItem =  billItemMapper.fromBillItemRequestDTOToBillItem(billItemRequestDTO);
-//        BillItem myBillItem = billItemRepository.findById(id).orElseThrow();
-//        if (billItem.getAmount()!=null) myBillItem.setAmount(billItem.getAmount());
-//        if (billItem.getDiscountPercentage()!=null) myBillItem.setDiscountPercentage(billItem.getDiscountPercentage());
-//        if (billItem.getQte()!=null) myBillItem.setQte(billItem.getQte());
-//        if (billItem.getRateTva()!=null) myBillItem.setRateTva(billItem.getRateTva());
-//        if (billItem.getBill()!=null) myBillItem.setBill(billItem.getBill());
-//        billItemRepository.save(myBillItem);
-//
-//        BillItemResponseDTO billItemResponseDTO = billItemMapper.fromBillItemToBillItemResponseDTO(myBillItem);
-//
-//        return billItemResponseDTO;
-//    }
 
 
     @Override
