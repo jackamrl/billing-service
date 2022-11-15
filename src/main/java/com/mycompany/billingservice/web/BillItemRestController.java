@@ -54,7 +54,7 @@ public class BillItemRestController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
         billItemService.delete(id);
-        return ResponseEntity.ok("bill "+id+"item deleted");
+        return ResponseEntity.ok("bill item "+id+" deleted");
 
     }
 

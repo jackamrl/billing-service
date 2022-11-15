@@ -25,8 +25,8 @@ public class QuoteItem {
     @Basic(optional = false)
     @Column(name = "qte")
     private Integer qte;
-    @JoinColumn(name = "no_quote", referencedColumnName = "no_quote", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "no_quote", referencedColumnName = "no_quote")
     private Quote quote;
 
 

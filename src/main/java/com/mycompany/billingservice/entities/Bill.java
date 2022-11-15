@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 //update 02/11/2022
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,6 @@ public class Bill {
     @Column(name = "total_ttc")
     private Double totalTTC;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill",fetch = FetchType.EAGER)
-    private List<BillItem> billItemList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "bill",fetch = FetchType.LAZY)
+    private List<BillItem> billItemList = new ArrayList<BillItem>();
 }
