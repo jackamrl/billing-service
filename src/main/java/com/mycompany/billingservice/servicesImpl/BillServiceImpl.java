@@ -6,6 +6,8 @@ import com.mycompany.billingservice.entities.Bill;
 import com.mycompany.billingservice.mappers.BillMapper;
 import com.mycompany.billingservice.repositories.BillRepository;
 import com.mycompany.billingservice.services.BillService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +18,15 @@ import java.util.List;
 
 @Service
 @Transactional
+//@RequiredArgsConstructor
+//@Slf4j
 public class BillServiceImpl implements BillService {
 
     private BillRepository billRepository;
-
-
     private BillMapper billMapper;
 
-    public BillServiceImpl(BillRepository billRepository,BillMapper billMapper) {
+
+    public BillServiceImpl(BillRepository billRepository, BillMapper billMapper) {
         this.billRepository = billRepository;
         this.billMapper = billMapper;
     }

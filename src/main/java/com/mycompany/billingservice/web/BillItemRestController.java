@@ -5,6 +5,7 @@ import com.mycompany.billingservice.dto.billItem.BillItemRequestDTO;
 import com.mycompany.billingservice.dto.billItem.BillItemResponseDTO;
 import com.mycompany.billingservice.repositories.BillItemRepository;
 import com.mycompany.billingservice.services.BillItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,12 @@ import java.util.List;
 @RequestMapping("/api/billitem")
 public class BillItemRestController {
 
+    @Autowired
     private BillItemService billItemService;
 
 
-    public BillItemRestController(BillItemService billItemService) {
-        this.billItemService = billItemService;
+    public BillItemRestController() {
+
     }
 
     //List of bill items

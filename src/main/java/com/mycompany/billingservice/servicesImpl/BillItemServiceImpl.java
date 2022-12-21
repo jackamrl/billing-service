@@ -6,6 +6,9 @@ import com.mycompany.billingservice.entities.BillItem;
 import com.mycompany.billingservice.mappers.BillItemMapper;
 import com.mycompany.billingservice.repositories.BillItemRepository;
 import com.mycompany.billingservice.services.BillItemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +23,11 @@ public class BillItemServiceImpl implements BillItemService {
     BillItemRepository billItemRepository;
     BillItemMapper billItemMapper;
 
+
     public BillItemServiceImpl(BillItemRepository billItemRepository, BillItemMapper billItemMapper) {
         this.billItemRepository = billItemRepository;
         this.billItemMapper = billItemMapper;
     }
-
 
     @Override
     public BillItemResponseDTO save(BillItemRequestDTO billItemRequestDTO) {
@@ -36,7 +39,7 @@ public class BillItemServiceImpl implements BillItemService {
     }
 
     // I want to return a bill item with type dto response.
-    // so i map every bill item in the list which billitemrepo return me
+    // so I have mapped every bill item in the list which billitemrepo return me
     @Override
     public List<BillItemResponseDTO> findAll() {
         List<BillItem> billItemList =  billItemRepository.findAll();// this is the list which billItem repo return me

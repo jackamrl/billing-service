@@ -16,7 +16,7 @@ import java.util.List;
 
 
 //The entity of bill
-//It have relation with Quote, BillItem, Patient and Setlement
+//It have relation with Quote, BillItem, Patient and Settlement
 
 @Entity
 @Table(name = "bill")

@@ -5,15 +5,25 @@ import com.mycompany.billingservice.dto.bill.BillResponseDTO;
 
 import com.mycompany.billingservice.repositories.BillRepository;
 import com.mycompany.billingservice.services.BillService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+@RefreshScope
 @RestController
 @RequestMapping("/api/bill")
 public class BillRestController {
+
+    @Value("${billing.params.x}")
+    private String x;
+    @Value("${billing.params.y}")
+    private String y;
+
 
     private BillService billService;
 
@@ -52,6 +62,17 @@ public class BillRestController {
          billService.delete(id);
          return ResponseEntity.ok("bill "+id+" deleted");
 
+    }
+    //Test
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        String message = "ok good";
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
+
+    @GetMapping ("/params")
+    public Map<String, String> params(){
+        return Map.of("x",x,"y",y);
     }
 
 }

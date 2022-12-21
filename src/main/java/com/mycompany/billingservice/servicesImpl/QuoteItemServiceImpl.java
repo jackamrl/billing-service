@@ -6,6 +6,7 @@ import com.mycompany.billingservice.entities.QuoteItem;
 import com.mycompany.billingservice.mappers.QuoteItemMapper;
 import com.mycompany.billingservice.repositories.QuoteItemRepository;
 import com.mycompany.billingservice.services.QuoteItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

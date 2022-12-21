@@ -6,6 +6,7 @@ import com.mycompany.billingservice.entities.Quote;
 import com.mycompany.billingservice.mappers.QuoteMapper;
 import com.mycompany.billingservice.repositories.QuoteRepository;
 import com.mycompany.billingservice.services.QuoteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,8 +19,8 @@ import java.util.List;
 public class QuoteServiceImpl implements QuoteService {
 
     private QuoteRepository quoteRepository;
-
     private QuoteMapper quoteMapper;
+
 
     public QuoteServiceImpl(QuoteRepository quoteRepository, QuoteMapper quoteMapper) {
         this.quoteRepository = quoteRepository;
