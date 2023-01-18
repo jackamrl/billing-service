@@ -33,6 +33,7 @@ public class BillRestController {
     }
 
     //List of bills
+//    @CrossOrigin(origins = "*")
     @GetMapping("/list")
     public ResponseEntity<List<BillResponseDTO>> filndAll(){
         List<BillResponseDTO> billList = billService.findAll();

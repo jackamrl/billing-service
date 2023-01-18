@@ -2,6 +2,7 @@ package com.mycompany.billingservice.entities;
 
 
 
+import com.mycompany.billingservice.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,5 +43,7 @@ public class BillItem {
     @JoinColumn(name = "no_bill", referencedColumnName = "no_bill")
     //@RestResource(path = "libraryAddress", rel="bill")
     private Bill bill;
+    @Transient
+    private Product product;
 
 }

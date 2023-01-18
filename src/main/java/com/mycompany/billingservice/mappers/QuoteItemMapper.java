@@ -16,14 +16,14 @@ public class QuoteItemMapper {
         this.modelMapper = modelMapper;
     }
 
-    //convert requestDto to QuoteItem
+    //convert quoteItemRequest to QuoteItem
     public QuoteItem fromQuoteItemRequestDTOToQuoteItem(QuoteItemRequestDTO quoteItemRequestDTO){
         QuoteItem quoteItem = modelMapper.map(quoteItemRequestDTO, QuoteItem.class);
 
         return quoteItem;
     }
 
-    //convert QuoteItem to responsDTO
+    //convert QuoteItem to quoteItemResponse
     public QuoteItemResponseDTO fromQuoteItemToQuoteItemResponse(QuoteItem quoteItem){
         QuoteItemResponseDTO quoteItemResponseDTO = modelMapper.map(quoteItem, QuoteItemResponseDTO.class);
 
