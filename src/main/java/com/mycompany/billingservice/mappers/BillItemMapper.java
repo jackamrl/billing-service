@@ -18,15 +18,15 @@ public class BillItemMapper {
         this.modelMapper = modelMapper;
     }
 
-    //convert requestDTO to billItem
+    //convert billItemRequest to billItem
     public BillItem fromBillItemRequestDTOToBillItem(BillItemRequestDTO billRequestDTO){
         BillItem billItem  = this.modelMapper.map(billRequestDTO,BillItem.class);
 
         return billItem;
     }
 
-    //convert billitem to responseDTO
-    public BillItemResponseDTO fromBillItemToResponseDTOBillItem(BillItem billItem){
+    //convert billitem to billItemResponse
+    public BillItemResponseDTO fromBillItemToBillItemResponseDTO(BillItem billItem){
         BillItemResponseDTO billItemResponseDTO = this.modelMapper.map(billItem, BillItemResponseDTO.class);
 
         return billItemResponseDTO;

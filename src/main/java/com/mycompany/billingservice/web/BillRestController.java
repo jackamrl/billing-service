@@ -2,59 +2,78 @@ package com.mycompany.billingservice.web;
 
 import com.mycompany.billingservice.dto.bill.BillRequestDTO;
 import com.mycompany.billingservice.dto.bill.BillResponseDTO;
-import com.mycompany.billingservice.entities.Bill;
+
 import com.mycompany.billingservice.repositories.BillRepository;
 import com.mycompany.billingservice.services.BillService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+@RefreshScope
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/bill")
 public class BillRestController {
 
-    private BillRepository billRepository;
+    @Value("${billing.params.x}")
+    private String x;
+    @Value("${billing.params.y}")
+    private String y;
+
+
     private BillService billService;
 
 
-    public BillRestController(BillRepository billRepository, BillService billService) {
-        this.billRepository = billRepository;
+    public BillRestController(BillService billService) {
         this.billService = billService;
     }
 
-    @GetMapping("/bills")
-    public List<Bill> billList(){
-        return billRepository.findAll();
+    //List of bills
+//    @CrossOrigin(origins = "*")
+    @GetMapping("/list")
+    public ResponseEntity<List<BillResponseDTO>> filndAll(){
+        List<BillResponseDTO> billList = billService.findAll();
+        return new ResponseEntity<>(billList, HttpStatus.OK);
+    }
+    // Find bill by id
+    @GetMapping("/{id}")
+    public ResponseEntity<BillResponseDTO> findById(@PathVariable Integer id){
+        BillResponseDTO billResponseDTO = billService.findById(id);
+        return new ResponseEntity<>(billResponseDTO,HttpStatus.OK);
+    }
+    //Add a new bill
+    @PostMapping("save")
+    public ResponseEntity<BillResponseDTO> save(@RequestBody BillRequestDTO billRequestDTO){
+        BillResponseDTO billResponseDTO = billService.save(billRequestDTO);
+        return new ResponseEntity<>(billResponseDTO, HttpStatus.CREATED);
+    }
+    // Edit a bill
+    @PutMapping("/{id}")
+    public ResponseEntity<BillResponseDTO> update(@PathVariable Integer id, @RequestBody BillRequestDTO billRequestDTO){
+        BillResponseDTO billResponseDTO = billService.update(id,billRequestDTO);
+        return new ResponseEntity<>(billResponseDTO, HttpStatus.OK);
+    }
+    // Delete a bill
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Integer id){
+         billService.delete(id);
+         return ResponseEntity.ok("bill "+id+" deleted");
+
+    }
+    //Test
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        String message = "ok good";
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @GetMapping("/bills/{id}")
-    public Bill bill(@PathVariable Integer id){
-        return billRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException(String.format("Bill %s not found",id)));
-    }
-
-    @PostMapping("bills")
-    public BillResponseDTO save(@RequestBody BillRequestDTO billRequestDTO){
-        return billService.addBill(billRequestDTO);
-    }
-
-    @PutMapping("bills/{id}")
-    public Bill update(@PathVariable Integer id, @RequestBody Bill bill){
-        Bill mybill = billRepository.findById(id).orElseThrow();
-        if (bill.getBillDate()!=null) mybill.setBillDate(new Date());
-        if (bill.getValidationDate()!=null) mybill.setValidationDate(new Date());
-        if (bill.getDiscountPercentage()!=null) mybill.setDiscountPercentage(bill.getDiscountPercentage());
-        if (bill.getTotalHt()!=null) mybill.setTotalHt(bill.getTotalHt());
-        if (bill.getTotalTTC()!=null) mybill.setTotalTTC(bill.getTotalTTC());
-
-        return billRepository.save(mybill);
-    }
-
-    @DeleteMapping("/bills/{id}")
-    public void deleteBill(@PathVariable Integer id){
-         billRepository.deleteById(id);
-
+    @GetMapping ("/params")
+    public Map<String, String> params(){
+        return Map.of("x",x,"y",y);
     }
 
 }

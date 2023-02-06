@@ -1,5 +1,6 @@
 package com.mycompany.billingservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 //update 02/11/2022
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class Quote {
     @Basic(optional = false)
     @Column(name = "total_ttc")
     private Double totalTTC;
-
-    @OneToMany( mappedBy = "quote")
-    private List<QuoteItem> quoteItemList;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "quote",fetch = FetchType.LAZY)
+    private List<QuoteItem> quoteItemList = new ArrayList<QuoteItem>();
 }

@@ -19,26 +19,21 @@ public class BillMapper {
         this.modelMapper = modelMapper;
     }
 
+    // this is a mapping with coppyProperties
     public BillResponseDTO fromBill(Bill bill){
         BillResponseDTO billResponseDTO = new BillResponseDTO();
         BeanUtils.copyProperties(bill, billResponseDTO);
 
         return billResponseDTO;
-
     }
-    //convert bill to responseDTO
+    //convert bill to billResponse
     public BillResponseDTO fromBillToBillResponseDTO(Bill bill){
         BillResponseDTO billResponseDTO = this.modelMapper.map(bill,BillResponseDTO.class);
 
         return billResponseDTO;
     }
-    //convert bill to requestDTO
-    public BillRequestDTO fromBillToBillRequestDTO(Bill bill){
-        BillRequestDTO billRequestDTO = this.modelMapper.map(bill,BillRequestDTO.class);
 
-        return billRequestDTO;
-    }
-    //convert requestDTO to bill
+    //convert billRequest to bill
     public Bill fromBillRequestDTOToBill(BillRequestDTO billRequestDTO){
         Bill bill = this.modelMapper.map(billRequestDTO,Bill.class);
 

@@ -2,11 +2,11 @@ package com.mycompany.billingservice.entities;
 
 
 
+import com.mycompany.billingservice.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 // JackDev
 //update 02/11/2022
@@ -43,5 +43,7 @@ public class BillItem {
     @JoinColumn(name = "no_bill", referencedColumnName = "no_bill")
     //@RestResource(path = "libraryAddress", rel="bill")
     private Bill bill;
+    @Transient
+    private Product product;
 
 }
